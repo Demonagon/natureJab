@@ -14,14 +14,12 @@ public class BasicTree implements WorldObject {
     private double x;
     private double y;
     private int waterLevel;
-    private int updateCounter;
 
 
     public BasicTree(double x, double y) {
         this.x = x;
         this.y = y;
         this.waterLevel = 0;
-        this.updateCounter = 1;
     }
 
     @Override
@@ -42,12 +40,6 @@ public class BasicTree implements WorldObject {
 
     @Override
     public void applyUpdate(World world) {
-        if(! (updateCounter % 10 == 0) ) {
-            updateCounter++;
-            return;
-        }
-
-        updateCounter = 1;
         if ( waterLevel >= 80 )
             waterLevel -= 80;
         waterLevel++;

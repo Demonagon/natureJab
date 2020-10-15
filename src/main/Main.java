@@ -31,16 +31,7 @@ public class Main extends Application {
         world.addObject(new BasicTree(0, 0));
         world.addObject(new BasicTree(100, 100));
 
-        final long startNanoTime = System.nanoTime();
-
-        AnimationTimer timer = new AnimationTimer()
-                {
-                    public void handle(long currentNanoTime)
-                    {
-                        world.update();
-                        world.paintWorld(canvas);
-                    }
-                };
+        UpdateTimer timer = new UpdateTimer(world, canvas, 60);
 
         timer.start();
         stage.show();
