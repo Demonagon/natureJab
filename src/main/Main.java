@@ -11,13 +11,15 @@ import world.objects.BasicTree;
 import world.objects.Grass;
 import world.World;
 
+import java.util.Random;
+
 public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override public void start(Stage stage) {
-        stage.setTitle( "Timeline Example" );
+        stage.setTitle( "Nature" );
 
         Group root = new Group();
         Scene scene = new Scene( root );
@@ -28,8 +30,10 @@ public class Main extends Application {
 
         World world = new World();
         world.addObject(new Grass());
-        world.addObject(new BasicTree(0, 0));
-        world.addObject(new BasicTree(100, 100));
+        Random random = new Random();
+        for(int k = 0; k < 100; k++) {
+            world.addObject(new BasicTree(random.nextInt() % 1001, random.nextInt() % 1001));
+        }
 
         UpdateTimer timer = new UpdateTimer(world, canvas, 60);
 

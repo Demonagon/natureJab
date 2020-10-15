@@ -3,23 +3,26 @@ package world.objects;
 import graphics.Utils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 import world.PaintableObject;
 import world.World;
 import world.WorldObject;
 
 public class BasicTree implements WorldObject {
 
-    public static final int MAX_WATER = 100;
+    public static final double MAX_WATER = 100;
+    public static final double UPKEEP_WATER_COST = 8;
+    public static final double ROOT_RADIUS = 80;
 
     private double x;
     private double y;
-    private int waterLevel;
+    private double waterLevel;
 
 
     public BasicTree(double x, double y) {
         this.x = x;
         this.y = y;
-        this.waterLevel = 0;
+        this.waterLevel = 50;
     }
 
     @Override
@@ -27,10 +30,20 @@ public class BasicTree implements WorldObject {
         gc.save();
         gc.setFill(Color.BROWN);
         gc.fillOval(x - 20, y - 20, 40, 40);
+        gc.strokeOval(x - ROOT_RADIUS, y - ROOT_RADIUS, 2 * ROOT_RADIUS, 2 * ROOT_RADIUS);
         gc.setFill(Color.BLUE);
-        Utils.paintCamemberg(gc, x, y, 18, (waterLevel / (double) MAX_WATER));
-        //gc.fillRect(x - 5 , y + 10  - 20 * (waterLevel / (double) MAX_WATER), 10, 20 * (waterLevel / (double) MAX_WATER));
+        Utils.paintCamemberg(gc, x, y, 18, (waterLevel / MAX_WATER));
         gc.restore();
+    }
+
+    @Override
+    public void setup(World world) {
+        world.getWaterReagent().addDemand(this, x, y, ROOT_RADIUS);
+    }
+
+    @Override
+    public void removal(World world) {
+        world.getWaterReagent().removeDemand(this);
     }
 
     @Override
@@ -40,8 +53,9 @@ public class BasicTree implements WorldObject {
 
     @Override
     public void applyUpdate(World world) {
-        if ( waterLevel >= 80 )
-            waterLevel -= 80;
-        waterLevel++;
+        this.waterLevel += world.getWaterReagent().getWater(this);
+        this.waterLevel -= BasicTree.UPKEEP_WATER_COST;
+        if(waterLevel <= 0) world.removeObject(this);
+        if(waterLevel > MAX_WATER) waterLevel = MAX_WATER;
     }
 }

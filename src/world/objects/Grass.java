@@ -19,12 +19,16 @@ public class Grass implements WorldObject {
     }
 
     @Override
+    public void setup(World world) {}
+
+    @Override
+    public void removal(World world) {}
+
+    @Override
     public boolean prepareUpdate(World world) {
         return false;
     }
 
     @Override
-    public void applyUpdate(World world) {
-
-    }
+    public void applyUpdate(World world) {}
 }

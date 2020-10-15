@@ -8,11 +8,23 @@ import java.util.List;
 public class World {
     private List<WorldObject> objects = new ArrayList<>();
 
+    private WaterReagent waterReagent;
+
+    public World() {
+        waterReagent = new WaterReagent();
+    }
+
+    public WaterReagent getWaterReagent() {
+        return waterReagent;
+    }
+
     public void addObject(WorldObject o) {
         objects.add(o);
+        o.setup(this);
     }
 
     public void removeObject(WorldObject o) {
+        o.removal(this);
         objects.remove(o);
     }
 
