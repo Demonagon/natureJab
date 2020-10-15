@@ -1,7 +1,8 @@
-package world;
+package world.objects;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import world.PaintableObject;
 
 public class Grass implements PaintableObject {
     private int width = 1000;

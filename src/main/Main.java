@@ -4,13 +4,11 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import javafx.scene.canvas.Canvas;
-import world.Grass;
+import world.objects.BasicTree;
+import world.objects.Grass;
 import world.World;
-
-import java.awt.*;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -29,6 +27,8 @@ public class Main extends Application {
 
         World world = new World();
         world.addObject(new Grass());
+        world.addObject(new BasicTree(0, 0));
+        world.addObject(new BasicTree(100, 100));
 
         final long startNanoTime = System.nanoTime();
 
