@@ -35,8 +35,9 @@ public class Main extends Application {
             world.addObject(new BasicTree(random.nextInt() % 1001, random.nextInt() % 1001));
         }
 
-        UpdateTimer timer = new UpdateTimer(world, canvas, 60);
+        UpdateTimer timer = new UpdateTimer(world, canvas, 30);
 
+        world.paintWorld(canvas);
         timer.start();
         stage.show();
     }

@@ -19,6 +19,10 @@ public class WaterReagent {
         demands.removeAll(removals);
     }
 
+    public void clear() {
+        demands.clear();
+    }
+
     public double getWater(Object o) {
         double water = 0;
         for(Demand d : demands)
@@ -28,17 +32,17 @@ public class WaterReagent {
     }
 
     private double demandGetWater(Demand demand) {
-        double offer = 10;
+        double offer = 0.05 * demand.radius;
 
-        double competition = 1;
+        double competition = 0;
 
         for(Demand d : demands) {
             if (d == demand) continue;
             if (d.isNextTo(demand))
-                competition += 1;
+                competition += d.radius;
         }
 
-        return offer / competition;
+        return (offer * demand.radius) / (demand.radius + competition);
     }
 
     private class Demand {

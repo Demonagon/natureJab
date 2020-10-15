@@ -44,5 +44,6 @@ public class World {
         for(WorldObject object : phaseTwoList)
             object.applyUpdate(this);
 
+        waterReagent.clear();
     }
 }
