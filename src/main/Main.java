@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import javafx.scene.canvas.Canvas;
+import world.Grass;
+import world.World;
 
 import java.awt.*;
 
@@ -19,13 +21,14 @@ public class Main extends Application {
         stage.setTitle( "Timeline Example" );
 
         Group root = new Group();
-        Scene theScene = new Scene( root );
-        stage.setScene( theScene );
+        Scene scene = new Scene( root );
+        stage.setScene( scene );
 
-        Canvas canvas = new Canvas( 512, 512 );
+        Canvas canvas = new Canvas( 1000, 1000 );
         root.getChildren().add( canvas );
 
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        World world = new World();
+        world.addObject(new Grass());
 
         final long startNanoTime = System.nanoTime();
 
@@ -33,14 +36,7 @@ public class Main extends Application {
         {
             public void handle(long currentNanoTime)
             {
-                double t = (currentNanoTime - startNanoTime) / 1000000000.0;
-
-                double x = 232 + 128 * Math.cos(t);
-                double y = 232 + 128 * Math.sin(t);
-
-                // background image clears canvas
-                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                gc.fillRect(x - 50, y - 50, 100, 100);
+                world.paintWorld(canvas);
             }
         }.start();
 
