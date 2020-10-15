@@ -1,5 +1,6 @@
 package world.objects;
 
+import graphics.Utils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import world.PaintableObject;
@@ -8,23 +9,29 @@ import world.WorldObject;
 
 public class BasicTree implements WorldObject {
 
-    private static final int MAX_AGE = 1000;
+    public static final int MAX_WATER = 100;
 
     private double x;
     private double y;
-    private int age;
+    private int waterLevel;
+    private int updateCounter;
+
 
     public BasicTree(double x, double y) {
         this.x = x;
         this.y = y;
-        this.age = 0;
+        this.waterLevel = 0;
+        this.updateCounter = 1;
     }
 
     @Override
     public void paint(GraphicsContext gc) {
         gc.save();
-        gc.setFill(Color.BROWN.interpolate(Color.BLACK, age / (double) MAX_AGE));
+        gc.setFill(Color.BROWN);
         gc.fillOval(x - 20, y - 20, 40, 40);
+        gc.setFill(Color.BLUE);
+        Utils.paintCamemberg(gc, x, y, 18, (waterLevel / (double) MAX_WATER));
+        //gc.fillRect(x - 5 , y + 10  - 20 * (waterLevel / (double) MAX_WATER), 10, 20 * (waterLevel / (double) MAX_WATER));
         gc.restore();
     }
 
@@ -35,8 +42,14 @@ public class BasicTree implements WorldObject {
 
     @Override
     public void applyUpdate(World world) {
-        if( age >= MAX_AGE )
-            world.removeObject(this);
-        else age++;
+        if(! (updateCounter % 10 == 0) ) {
+            updateCounter++;
+            return;
+        }
+
+        updateCounter = 1;
+        if ( waterLevel >= 80 )
+            waterLevel -= 80;
+        waterLevel++;
     }
 }
