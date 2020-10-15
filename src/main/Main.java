@@ -1,5 +1,6 @@
 package main;
 
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -32,14 +33,16 @@ public class Main extends Application {
 
         final long startNanoTime = System.nanoTime();
 
-        new AnimationTimer()
-        {
-            public void handle(long currentNanoTime)
-            {
-                world.paintWorld(canvas);
-            }
-        }.start();
+        AnimationTimer timer = new AnimationTimer()
+                {
+                    public void handle(long currentNanoTime)
+                    {
+                        world.update();
+                        world.paintWorld(canvas);
+                    }
+                };
 
+        timer.start();
         stage.show();
     }
 }
