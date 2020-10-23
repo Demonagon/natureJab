@@ -10,6 +10,8 @@ import javafx.scene.canvas.Canvas;
 import world.objects.BasicTree;
 import world.objects.Grass;
 import world.World;
+import world.objects.SpreadTree;
+import world.objects.TiledFloor;
 
 import java.util.Random;
 
@@ -30,10 +32,12 @@ public class Main extends Application {
 
         World world = new World();
         world.addObject(new Grass());
-        Random random = new Random();
+        //world.addObject(new TiledFloor());
+        /*Random random = new Random();
         for(int k = 0; k < 100; k++) {
             world.addObject(new BasicTree(random.nextInt() % 1001, random.nextInt() % 1001));
-        }
+        }*/
+        world.addObject(new SpreadTree(500, 500, 50));
 
         UpdateTimer timer = new UpdateTimer(world, canvas, 30);
 

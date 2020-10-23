@@ -4,14 +4,20 @@ import javafx.scene.canvas.Canvas;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class World {
     private List<WorldObject> objects = new ArrayList<>();
+    private Random random = new Random();
 
     private WaterReagent waterReagent;
 
     public World() {
         waterReagent = new WaterReagent();
+    }
+
+    public Random getRandom() {
+        return random;
     }
 
     public WaterReagent getWaterReagent() {
