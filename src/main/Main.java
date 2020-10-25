@@ -35,7 +35,7 @@ public class Main extends Application {
             world.addObject(new BasicTree(random.nextInt() % 1001, random.nextInt() % 1001));
         }*/
         //world.addObject(new SpreadTree(500, 500, 50));
-        world.addObject(new GrowTree(500, 500));
+        world.addObject(new GrowTree(500, 900));
 
         UpdateTimer timer = new UpdateTimer(world, canvas, 30);
 
