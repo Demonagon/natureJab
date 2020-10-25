@@ -7,6 +7,7 @@ import world.WorldObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GrowTree implements WorldObject {
 
@@ -107,9 +108,14 @@ public class GrowTree implements WorldObject {
             this.distance += value;
         }
 
-        protected void paint(GraphicsContext gc) {
+        public abstract void paintBranch(GraphicsContext gc);
+
+        public void paint(GraphicsContext gc) {
             gc.save();
-            gc.rotate(angle);
+            if(parent != null) gc.rotate(angle);
+
+            paintBranch(gc);
+
             gc.translate(0, - distance);
             paintPart(gc);
             for(Part child : children)
@@ -126,11 +132,21 @@ public class GrowTree implements WorldObject {
         public final static double MAX_SIZE = 20;
         public final static double MAX_DISTANCE = 100;
 
-        private double size;
+        protected double size;
         //private double distance;
 
         public Bamboo(Part parent) {
-            super(parent, 0, 0);
+            super(parent, 45, 0);
+        }
+
+        public void paintBranch(GraphicsContext gc) {
+            if( parent == null ) return;
+            if(! (parent instanceof Bamboo) ) return;
+            Bamboo bambooParent = (Bamboo) parent;
+            double xs[] = {-bambooParent.size, -size, size, bambooParent.size};
+            double ys[] = {0, -getDistance(), -getDistance(), 0};
+            gc.setFill(Color.BROWN);
+            gc.fillPolygon(xs, ys, 4);
         }
 
         @Override
