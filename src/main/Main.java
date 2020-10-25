@@ -7,11 +7,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.canvas.Canvas;
-import world.objects.BasicTree;
-import world.objects.Grass;
+import world.objects.*;
 import world.World;
-import world.objects.SpreadTree;
-import world.objects.TiledFloor;
 
 import java.util.Random;
 
@@ -37,7 +34,8 @@ public class Main extends Application {
         for(int k = 0; k < 100; k++) {
             world.addObject(new BasicTree(random.nextInt() % 1001, random.nextInt() % 1001));
         }*/
-        world.addObject(new SpreadTree(500, 500, 50));
+        //world.addObject(new SpreadTree(500, 500, 50));
+        world.addObject(new GrowTree(500, 500));
 
         UpdateTimer timer = new UpdateTimer(world, canvas, 30);
 
