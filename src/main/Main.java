@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.canvas.Canvas;
+import util.Task;
 import world.objects.*;
 import world.World;
 
@@ -14,7 +15,18 @@ import java.util.Random;
 
 public class Main extends Application {
     public static void main(String[] args) {
-        launch(args);
+
+        CounterTask t1 = new CounterTask("T1", 10);
+        CounterTask t2 = new CounterTask("T2", 5);
+        CounterTask t3 = new CounterTask("T3", 8);
+
+        Task task = new Task.ParallelTasks(new CounterTask[]{t1, t2, t3});
+
+        while( ! task.isOver() ) {
+            task.allocate(1.5);
+        }
+
+        //launch(args);
     }
 
     @Override public void start(Stage stage) {
@@ -42,5 +54,30 @@ public class Main extends Application {
         world.paintWorld(canvas);
         timer.start();
         stage.show();
+    }
+
+    static class CounterTask implements Task {
+
+        String name;
+        double counter = 0;
+        double max;
+
+        public CounterTask(String name, double max) {
+            this.name = name;
+            this.max = max;
+        }
+
+        @Override
+        public double allocate(double credits) {
+            double transfer = Math.min(max - counter, credits);
+            System.out.println(name + " : passage de " + counter + " à " + (counter + transfer));
+            counter += transfer;
+            return credits - transfer;
+        }
+
+        @Override
+        public boolean isOver() {
+            return counter >= max;
+        }
     }
 }
