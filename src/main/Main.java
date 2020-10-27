@@ -11,6 +11,7 @@ import util.Task;
 import world.objects.*;
 import world.World;
 import world.objects.tree.Bamboo;
+import world.objects.tree.CanvasTreeDecorator;
 
 import java.util.Random;
 
@@ -29,7 +30,7 @@ public class Main extends Application {
         Canvas canvas = new Canvas( 1000, 1000 );
         root.getChildren().add( canvas );
 
-        World world = new World(new Bamboo.CanvasBambooDecorator(canvas));
+        World world = new World(new CanvasTreeDecorator(canvas));
         world.addObject(new Grass());
         //world.addObject(new TiledFloor());
         /*Random random = new Random();

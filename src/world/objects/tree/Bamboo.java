@@ -22,8 +22,15 @@ public class Bamboo {
         );
     }
 
+    public static TreeGraphicalProfile bambooGraphicalProfile() {
+        return new TreeGraphicalProfile(TreeGraphicalProfile.NodeStyle.SPHERE,
+                                        TreeGraphicalProfile.Material.BAMBOO,
+                                        TreeGraphicalProfile.BranchStyle.MINIMALRADIUS,
+                                        TreeGraphicalProfile.Material.BAMBOO);
+    }
+
     public static Tree leaf(Tree parent) {
-        Tree leaf = new Tree(parent);
+        Tree leaf = new Tree(parent, bambooGraphicalProfile());
         leaf.setGrowTask(leafTask(leaf));
         return leaf;
     }
@@ -88,51 +95,8 @@ public class Bamboo {
     }
 
     public static Tree trunk(Tree parent) {
-        Tree trunk = new Tree(parent);
+        Tree trunk = new Tree(parent, bambooGraphicalProfile());
         trunk.setGrowTask(trunkTask(trunk));
         return trunk;
-    }
-
-    public static class CanvasBambooDecorator extends CanvasTreeDecorator {
-
-        GraphicsContext gc;
-
-        public CanvasBambooDecorator(Canvas canvas) {
-            super(canvas);
-            gc = canvas.getGraphicsContext2D();
-        }
-
-        public void paintBranch(Tree tree) {
-            if( tree.getParent() == null ) return;
-            double xs[] = {-tree.getSize(), -tree.getSize(), tree.getSize(), tree.getSize()};
-            double ys[] = {0, tree.getDistance(), tree.getDistance(), 0};
-            gc.setFill(Color.BROWN);
-            gc.fillPolygon(xs, ys, 4);
-        }
-
-        @Override
-        public void paintObject(Tree tree) {
-            gc.save();
-
-            if(tree.getParent() != null)
-                gc.translate(0, -tree.getDistance());
-
-            paintBranch(tree);
-
-            gc.setFill(Color.BROWN);
-            gc.fillOval(-tree.getSize(), -tree.getSize(), tree.getSize() * 2, tree.getSize() * 2);
-            gc.setFill(Color.BLACK);
-            gc.strokeOval(-tree.getSize(), -tree.getSize(), tree.getSize() * 2, tree.getSize() * 2);
-
-            for(Tree.Child child : tree.getChildren()) {
-                gc.save();
-                gc.rotate(child.angle);
-                paintObject(child.tree);
-                gc.restore();
-            }
-
-
-            gc.restore();
-        }
     }
 }

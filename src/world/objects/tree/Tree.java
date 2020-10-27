@@ -13,6 +13,7 @@ import java.util.List;
 // Version 2D.
 public class Tree implements WorldObject {
     protected final Tree parent;
+    private TreeGraphicalProfile graphicalProfile;
     private double size;
     private double distance;
     private final List<Child> children;
@@ -21,24 +22,29 @@ public class Tree implements WorldObject {
 
     public Tree() {
         parent = null;
+        graphicalProfile = null;
         size = 0;
         distance = 0;
         children = new ArrayList<>();
     }
 
-    public Tree(Tree parent) {
+    public Tree(Tree parent, TreeGraphicalProfile graphicalProfile) {
         this.parent = parent;
+        this.graphicalProfile = graphicalProfile;
         size = 0;
         distance = 0;
         children = new ArrayList<>();
     }
 
-    public Tree(Tree parent, double size, double distance) {
+    public Tree(Tree parent, TreeGraphicalProfile graphicalProfile, double size, double distance) {
         this.parent = parent;
+        this.graphicalProfile = graphicalProfile;
         this.size = size;
         this.distance = distance;
         children = new ArrayList<>();
     }
+
+    public TreeGraphicalProfile getGraphicalProfile() { return graphicalProfile; }
 
     public void setGrowTask(Task task) {
         this.growTask = task;
