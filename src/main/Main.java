@@ -15,18 +15,7 @@ import java.util.Random;
 
 public class Main extends Application {
     public static void main(String[] args) {
-
-        CounterTask t1 = new CounterTask("T1", 10);
-        CounterTask t2 = new CounterTask("T2", 5);
-        CounterTask t3 = new CounterTask("T3", 8);
-
-        Task task = new Task.ParallelTasks(new CounterTask[]{t1, t2, t3});
-
-        while( ! task.isOver() ) {
-            task.allocate(1.5);
-        }
-
-        //launch(args);
+        launch(args);
     }
 
     @Override public void start(Stage stage) {
@@ -47,7 +36,8 @@ public class Main extends Application {
             world.addObject(new BasicTree(random.nextInt() % 1001, random.nextInt() % 1001));
         }*/
         //world.addObject(new SpreadTree(500, 500, 50));
-        world.addObject(new GrowTree(500, 900));
+        //world.addObject(new GrowTree(500, 900));
+        //world.addObject();
 
         UpdateTimer timer = new UpdateTimer(world, canvas, 30);
 

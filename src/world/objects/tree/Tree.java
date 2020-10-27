@@ -1,6 +1,7 @@
 package world.objects.tree;
 
 import javafx.scene.canvas.GraphicsContext;
+import util.Task;
 import world.objects.GrowTree;
 
 import java.security.InvalidParameterException;
@@ -8,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Version 2D.
-public abstract class Tree {
+public class Tree {
     protected final Tree parent;
     private double size;
     private double distance;
     private final List<Child> children;
+
+    protected Task growTask;
 
     public Tree() {
             parent = null;
@@ -26,6 +29,14 @@ public abstract class Tree {
         this.size = size;
         this.distance = distance;
         children = new ArrayList<>();
+    }
+
+    public void setGrowTask(Task task) {
+        this.growTask = task;
+    }
+
+    public Tree getParent() {
+        return parent;
     }
 
     public List<Child> getChildren() {
@@ -86,7 +97,9 @@ public abstract class Tree {
         this.distance += value;
     }
 
-    protected abstract double grow(double credits);
+    protected double grow(double credits) {
+        return growTask.allocate(credits);
+    }
 
     protected static class Child {
         public Child(Tree tree, double angle) {
