@@ -3,8 +3,6 @@ package world.objects;
 import graphics.Utils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
-import world.PaintableObject;
 import world.World;
 import world.WorldObject;
 
@@ -46,7 +44,7 @@ public class BasicTree implements WorldObject {
         return FULL_UPKEEP_WATER_COST * trunkSize();
     }
 
-    @Override
+    //@Override
     public void paint(GraphicsContext gc) {
         gc.save();
         gc.setFill(Color.BROWN);

@@ -26,7 +26,7 @@ public class SpreadTree implements WorldObject {
         this.angle = angle;
     }
 
-    @Override
+    //@Override
     public void paint(GraphicsContext gc) {
         gc.save();
         gc.setFill(Color.BROWN);

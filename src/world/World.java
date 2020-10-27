@@ -1,19 +1,26 @@
 package world;
 
-import javafx.scene.canvas.Canvas;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class World {
-    private List<WorldObject> objects = new ArrayList<>();
+
+    private final List<WorldObject> objects = new ArrayList<>();
+    private final WorldDecorator decorator;
+
     private Random random = new Random();
 
     private WaterReagent waterReagent;
 
-    public World() {
+    public World(WorldDecorator decorator) {
+        this.decorator = decorator;
         waterReagent = new WaterReagent();
+    }
+
+    public WorldDecorator getDecorator() {
+        return decorator;
     }
 
     public Random getRandom() {
@@ -24,6 +31,10 @@ public class World {
         return waterReagent;
     }
 
+    public List<WorldObject> getObjects() {
+        return objects;
+    }
+
     public void addObject(WorldObject o) {
         objects.add(o);
         o.setup(this);
@@ -32,12 +43,6 @@ public class World {
     public void removeObject(WorldObject o) {
         o.removal(this);
         objects.remove(o);
-    }
-
-    public void paintWorld(Canvas worldCanvas) {
-        worldCanvas.getGraphicsContext2D().clearRect(0, 0, worldCanvas.getWidth(), worldCanvas.getHeight());
-        for(PaintableObject object : objects)
-            object.paint(worldCanvas.getGraphicsContext2D());
     }
 
     public void update() {

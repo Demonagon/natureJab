@@ -11,7 +11,7 @@ public class TiledFloor implements WorldObject {
     private double lineThickness = 1;
     private int lineSeparation = 100;
 
-    @Override
+    //@Override
     public void paint(GraphicsContext gc) {
         gc.save();
         gc.setFill(Color.rgb(100, 100, 100));

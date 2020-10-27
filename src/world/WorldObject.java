@@ -1,3 +1,3 @@
 package world;
 
-public interface WorldObject extends UpdatableObject, PaintableObject {}
+public interface WorldObject extends UpdatableObject {}

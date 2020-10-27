@@ -9,6 +9,19 @@ public interface Task {
     double allocate(double credits);
     boolean isOver();
 
+    class EmptyTask implements Task {
+
+        @Override
+        public double allocate(double credits) {
+            return credits;
+        }
+
+        @Override
+        public boolean isOver() {
+            return true;
+        }
+    }
+
     // Prioritize in order
     class OrderedTasks implements Task {
 

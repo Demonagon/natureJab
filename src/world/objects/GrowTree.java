@@ -26,7 +26,7 @@ public class GrowTree implements WorldObject {
         root = new Bamboo(null);
     }
 
-    @Override
+    //@Override
     public void paint(GraphicsContext gc) {
         gc.save();
         gc.translate(x, y);

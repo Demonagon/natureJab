@@ -7,14 +7,12 @@ import world.World;
 public class UpdateTimer extends AnimationTimer {
 
     World world;
-    Canvas canvas;
     int ups;
     long updateTime;
     long lastUpdateTime;
 
-    public UpdateTimer(World world, Canvas canvas, int ups) {
+    public UpdateTimer(World world, int ups) {
         this.world = world;
-        this.canvas = canvas;
         this.ups = ups;
         this.updateTime = 1000000000 / ups;
         this.lastUpdateTime = System.nanoTime();
@@ -27,6 +25,6 @@ public class UpdateTimer extends AnimationTimer {
         lastUpdateTime = currentTime;
 
         world.update();
-        world.paintWorld(canvas);
+        world.getDecorator().paint(world);
     }
 }

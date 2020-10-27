@@ -2,6 +2,8 @@ package world.objects.tree;
 
 import javafx.scene.canvas.GraphicsContext;
 import util.Task;
+import world.World;
+import world.WorldObject;
 import world.objects.GrowTree;
 
 import java.security.InvalidParameterException;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Version 2D.
-public class Tree {
+public class Tree implements WorldObject {
     protected final Tree parent;
     private double size;
     private double distance;
@@ -18,11 +20,18 @@ public class Tree {
     protected Task growTask;
 
     public Tree() {
-            parent = null;
-            size = 0;
-            distance = 0;
-            children = new ArrayList<>();
-        }
+        parent = null;
+        size = 0;
+        distance = 0;
+        children = new ArrayList<>();
+    }
+
+    public Tree(Tree parent) {
+        this.parent = parent;
+        size = 0;
+        distance = 0;
+        children = new ArrayList<>();
+    }
 
     public Tree(Tree parent, double size, double distance) {
         this.parent = parent;
@@ -34,6 +43,8 @@ public class Tree {
     public void setGrowTask(Task task) {
         this.growTask = task;
     }
+
+    public Task getGrowTask() { return growTask; }
 
     public Tree getParent() {
         return parent;
@@ -101,7 +112,23 @@ public class Tree {
         return growTask.allocate(credits);
     }
 
-    protected static class Child {
+    @Override
+    public void setup(World world) {}
+
+    @Override
+    public void removal(World world) {}
+
+    @Override
+    public boolean prepareUpdate(World world) {
+        return true;
+    }
+
+    @Override
+    public void applyUpdate(World world) {
+        grow(1);
+    }
+
+    public static class Child {
         public Child(Tree tree, double angle) {
             this.tree = tree;
             this.angle = angle;

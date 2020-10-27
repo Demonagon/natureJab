@@ -10,6 +10,7 @@ import javafx.scene.canvas.Canvas;
 import util.Task;
 import world.objects.*;
 import world.World;
+import world.objects.tree.Bamboo;
 
 import java.util.Random;
 
@@ -28,7 +29,7 @@ public class Main extends Application {
         Canvas canvas = new Canvas( 1000, 1000 );
         root.getChildren().add( canvas );
 
-        World world = new World();
+        World world = new World(new Bamboo.CanvasBambooDecorator(canvas));
         world.addObject(new Grass());
         //world.addObject(new TiledFloor());
         /*Random random = new Random();
@@ -37,11 +38,11 @@ public class Main extends Application {
         }*/
         //world.addObject(new SpreadTree(500, 500, 50));
         //world.addObject(new GrowTree(500, 900));
-        //world.addObject();
+        world.addObject(Bamboo.trunk(null));
 
-        UpdateTimer timer = new UpdateTimer(world, canvas, 30);
+        UpdateTimer timer = new UpdateTimer(world, 30);
 
-        world.paintWorld(canvas);
+        world.getDecorator().paint(world);
         timer.start();
         stage.show();
     }
