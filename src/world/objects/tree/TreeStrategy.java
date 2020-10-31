@@ -118,7 +118,7 @@ public class TreeStrategy {
 
             @Override
             public boolean isOver() {
-                return ! isDone;
+                return isDone;
             }
         };
     }

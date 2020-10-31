@@ -133,7 +133,7 @@ public class Tree implements WorldObject {
 
     @Override
     public void applyUpdate(World world) {
-        grow(1000);
+        grow(100);
     }
 
     public static class Child {
