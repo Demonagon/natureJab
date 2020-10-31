@@ -12,7 +12,7 @@ import java.util.List;
 
 // Version 2D.
 public class Tree implements WorldObject {
-    protected final Tree parent;
+    protected Tree parent;
     private TreeGraphicalProfile graphicalProfile;
     private double size;
     private double distance;
@@ -55,6 +55,8 @@ public class Tree implements WorldObject {
     public Tree getParent() {
         return parent;
     }
+
+    public void setParent(Tree parent) { this.parent = parent; }
 
     public List<Child> getChildren() {
         return children;
@@ -131,7 +133,7 @@ public class Tree implements WorldObject {
 
     @Override
     public void applyUpdate(World world) {
-        grow(1);
+        grow(1000);
     }
 
     public static class Child {

@@ -89,4 +89,42 @@ public interface Task {
             return true;
         }
     }
+
+    // Waits for first task to be over to start then. Never comes back to the first task, in fact deallocates the ref.
+    class FirstThenTask implements Task {
+        Task first;
+        Task then;
+
+        public FirstThenTask(Task first, Task then) {
+            this.first = first;
+            this.then = then;
+        }
+
+        @Override
+        public double allocate(double credits) {
+            if(first == null)
+                return then.allocate(credits);
+
+            if(first.isOver()) {
+                first = null;
+                return then.allocate(credits);
+            }
+
+            credits = first.allocate(credits);
+
+            if(first.isOver()) {
+                first = null;
+                return then.allocate(credits);
+            }
+
+            return credits;
+        }
+
+        @Override
+        public boolean isOver() {
+            if(first == null)
+                return then.isOver();
+            else return first.isOver();
+        }
+    }
 }

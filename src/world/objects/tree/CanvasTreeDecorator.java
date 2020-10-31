@@ -74,10 +74,10 @@ public class CanvasTreeDecorator implements WorldDecorator {
             case AIR:
                 return;
             case COMPLETE:
-                xs[0] = -tree.getParent().getSize();
-                xs[1] = -tree.getSize();
-                xs[2] = tree.getSize();
-                xs[3] = tree.getParent().getSize();
+                xs[0] = -tree.getSize();
+                xs[1] = -tree.getParent().getSize();
+                xs[2] = tree.getParent().getSize();
+                xs[3] = tree.getSize();
                 ys[1] = tree.getDistance();
                 ys[2] = tree.getDistance();
                 break;
@@ -87,6 +87,12 @@ public class CanvasTreeDecorator implements WorldDecorator {
                 xs[1] = -min;
                 xs[2] = min;
                 xs[3] = min;
+                ys[1] = tree.getDistance();
+                ys[2] = tree.getDistance();
+                break;
+            case POINTY:
+                xs[1] = -tree.getParent().getSize();
+                xs[2] = tree.getParent().getSize();
                 ys[1] = tree.getDistance();
                 ys[2] = tree.getDistance();
                 break;
@@ -105,10 +111,10 @@ public class CanvasTreeDecorator implements WorldDecorator {
             case AIR:
                 return;
             case COMPLETE:
-                xs[0] = -tree.getParent().getSize();
-                xs[1] = -tree.getSize();
-                xs[2] = tree.getSize();
-                xs[3] = tree.getParent().getSize();
+                xs[0] = -tree.getSize();
+                xs[1] = -tree.getParent().getSize();
+                xs[2] = tree.getParent().getSize();
+                xs[3] = tree.getSize();
                 ys[1] = tree.getDistance();
                 ys[2] = tree.getDistance();
                 break;
@@ -118,6 +124,12 @@ public class CanvasTreeDecorator implements WorldDecorator {
                 xs[1] = -min;
                 xs[2] = min;
                 xs[3] = min;
+                ys[1] = tree.getDistance();
+                ys[2] = tree.getDistance();
+                break;
+            case POINTY:
+                xs[1] = -tree.getParent().getSize();
+                xs[2] = tree.getParent().getSize();
                 ys[1] = tree.getDistance();
                 ys[2] = tree.getDistance();
                 break;

@@ -9,7 +9,8 @@ public class TreeGraphicalProfile {
     public enum BranchStyle {
         AIR,
         COMPLETE,
-        MINIMALRADIUS
+        MINIMALRADIUS,
+        POINTY
     }
 
     public enum Material {

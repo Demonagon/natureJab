@@ -10,6 +10,7 @@ import javafx.scene.canvas.Canvas;
 import util.Task;
 import world.objects.*;
 import world.World;
+import world.objects.tree.AppleTree;
 import world.objects.tree.Bamboo;
 import world.objects.tree.CanvasTreeDecorator;
 
@@ -39,7 +40,7 @@ public class Main extends Application {
         }*/
         //world.addObject(new SpreadTree(500, 500, 50));
         //world.addObject(new GrowTree(500, 900));
-        world.addObject(Bamboo.trunk(null));
+        world.addObject(AppleTree.appleTreeBase(50));
 
         UpdateTimer timer = new UpdateTimer(world, 30);
 
